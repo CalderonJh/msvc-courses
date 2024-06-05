@@ -110,7 +110,7 @@ public class CourseServiceImpl implements CourseService {
   public Course buyCourse(String courseId) {
     Course course = this.getCourse(courseId);
     course.setStudentsAmount(course.getStudentsAmount() + 1);
-    return course;
+    return this.courseRepository.save(course);
   }
 
   @Override

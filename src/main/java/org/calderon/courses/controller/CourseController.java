@@ -31,6 +31,11 @@ public class CourseController {
         courseService.getAll(pageable).map(CourseMapper.INSTANCE::toCourseResponseDTO));
   }
 
+  @GetMapping("/{id}")
+  public ResponseEntity<CourseResponseDTO> getCourse(@PathVariable String id) {
+    return ResponseEntity.ok(CourseMapper.INSTANCE.toCourseResponseDTO(courseService.getCourse(id)));
+  }
+
   @GetMapping("/filter/tag/{tag}")
   public ResponseEntity<Page<CourseResponseDTO>> getByTag(
       @PathVariable String tag, @PageableDefault Pageable pageable) {
@@ -79,7 +84,12 @@ public class CourseController {
 
   @PutMapping("/buy/{id}")
   public ResponseEntity<CourseResponseDTO> buyCourse(@PathVariable String id) {
-    return ResponseEntity.ok(CourseMapper.INSTANCE.toCourseResponseDTO(courseService.buyCourse(id)));
+    return ResponseEntity.ok(
+        CourseMapper.INSTANCE.toCourseResponseDTO(courseService.buyCourse(id)));
   }
 
+  @DeleteMapping("/delete/{id}")
+  public ResponseEntity<Boolean> deleteCourse(@PathVariable String id) {
+    return ResponseEntity.ok(courseService.deleteCourse(id));
+  }
 }
