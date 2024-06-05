@@ -1,6 +1,7 @@
 package org.calderon.courses.domain.dto.course;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Data;
@@ -17,4 +18,6 @@ public class CoursePostDTO {
   private String description;
 
   @NotBlank private String language;
+  @NotBlank private String instructorId;
+  @NotNull private Double price;
 }

@@ -7,10 +7,7 @@ import lombok.Data;
 @Data
 public class CoursePutDTO {
   private String name;
-
   private String[] tags;
-
   private String description;
-
   private String language;
 }

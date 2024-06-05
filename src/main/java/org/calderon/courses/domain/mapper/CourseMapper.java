@@ -1,20 +1,22 @@
 package org.calderon.courses.domain.mapper;
 
 import org.calderon.courses.domain.document.Course;
+import org.calderon.courses.domain.dto.course.CoursePostDTO;
 import org.calderon.courses.domain.dto.course.CourseResponseDTO;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
+@Mapper
 public interface CourseMapper {
-	static CourseResponseDTO toCourseResponseDTO(Course course) {
-		return CourseResponseDTO.builder()
-				.id(course.getId())
-				.name(course.getName())
-				.tags(course.getTags())
-				.description(course.getDescription())
-				.price(course.getPrice())
-				.language(course.getLanguage())
-				.studentsAmount(course.getStudentsAmount())
-				.rating(course.getRating())
-				.instructor(null)
-				.build();
-	}
+  CourseMapper INSTANCE = Mappers.getMapper(CourseMapper.class);
+
+  @Mapping(target = "id", ignore = true)
+  @Mapping(target = "rating", ignore = true)
+  @Mapping(target = "studentsAmount", ignore = true)
+  @Mapping(target = "instructor", ignore = true)
+  Course toCourse(CoursePostDTO dto);
+
+  CourseResponseDTO toCourseResponseDTO(Course course);
+
 }

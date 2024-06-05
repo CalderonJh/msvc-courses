@@ -1,27 +1,19 @@
 package org.calderon.courses.domain.mapper;
 
 import org.calderon.courses.domain.document.Instructor;
-import org.calderon.courses.domain.dto.intructor.InstructorPutDTO;
+import org.calderon.courses.domain.dto.intructor.InstructorPostDTO;
 import org.calderon.courses.domain.dto.intructor.InstructorResponseDTO;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
+@Mapper
 public interface InstructorMapper {
-	static InstructorResponseDTO toInstructorResponseDTO(Instructor instructor) {
-		return InstructorResponseDTO.builder()
-				.id(instructor.getId())
-				.name(instructor.getName())
-				.email(instructor.getEmail())
-				.bio(instructor.getBio())
-				.courses(instructor.getCourses())
-				.topics(instructor.getTopics())
-				.build();
-	}
+	InstructorMapper INSTANCE = Mappers.getMapper(InstructorMapper.class);
+	InstructorResponseDTO toInstructorResponseDTO(Instructor instructor);
 
-	static Instructor toInstructor(InstructorPutDTO instructorPutDTO) {
-		return Instructor.builder()
-				.name(instructorPutDTO.getName())
-				.email(instructorPutDTO.getEmail())
-				.bio(instructorPutDTO.getBio())
-				.topics(instructorPutDTO.getTopics())
-				.build();
-	}
+	@Mapping(target = "id", ignore = true)
+	@Mapping(target = "courses", ignore = true)
+	Instructor toInstructor(InstructorPostDTO dto);
+
 }

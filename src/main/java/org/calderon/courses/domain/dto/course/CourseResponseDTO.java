@@ -15,5 +15,6 @@ public class CourseResponseDTO {
   private String language;
   private Integer studentsAmount;
   private Double rating;
+  private Integer ratesAmount;
   private InstructorResponseDTO instructor;
 }
